@@ -140,16 +140,12 @@ function Temporizador(){
 
             botaoStartStop.onclick = startStop
             botaoReset.onclick = resetTimer
-        }  
-        
-       
+        }        
         
     }
 
-    this.ajuste = (x, y) => {
-        const cronometro = document.querySelector('.temporizadorConteiner')
-        cronometro.style.top = `${y}px`
-        cronometro.style.left = `${x}px`
+    this.ajusteCSS = function(color){
+        $('.temporizador').css('background-color', color)
     }
 }
 

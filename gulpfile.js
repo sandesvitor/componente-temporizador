@@ -20,7 +20,7 @@ function depsJS(){
         }))
         .on('error', err => console.log("erro: " + e))
         .pipe(uglify())
-        .pipe(concat('app.min.js'))
+        .pipe(concat('temporizador.min.js'))
         .pipe(gulp.dest('dist/js'))
 }
 
