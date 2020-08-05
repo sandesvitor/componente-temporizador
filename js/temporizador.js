@@ -1,5 +1,10 @@
 function Temporizador(){
-    this.init = () => {
+    this.init = function(args){
+        
+        // args = {
+        //     buttons: true,
+        // }
+
         function criarElemento(elemento, classe, html = '') {
             const e = document.createElement(elemento)
             e.classList.add(classe)
@@ -9,10 +14,10 @@ function Temporizador(){
         
         const tempConteiner = criarElemento('div', 'temporizadorConteiner')
         const temporizador = criarElemento('div', 'temporizador')
-        const botoes = criarElemento('div', 'botoes')
+        // const botoes = criarElemento('div', 'botoes')
         
         tempConteiner.appendChild(temporizador)
-        tempConteiner.appendChild(botoes)
+        // tempConteiner.appendChild(botoes)
         document.body.appendChild(tempConteiner)
         
         temporizador.appendChild(criarElemento('span', 'digito', '0'))
@@ -24,8 +29,12 @@ function Temporizador(){
         temporizador.appendChild(criarElemento('span', 'digito', '0'))
         temporizador.appendChild(criarElemento('span', 'digito','0'))
         
-        botoes.appendChild(criarElemento('button', 'botao', 'PLAY'))
-        botoes.appendChild(criarElemento('button', 'botao', 'RESET'))
+        if(args.buttons){
+            const botoes = criarElemento('div', 'botoes')
+            tempConteiner.appendChild(botoes)
+            botoes.appendChild(criarElemento('button', 'botao', 'PLAY'))
+            botoes.appendChild(criarElemento('button', 'botao', 'RESET'))
+        }       
         
         
         const digitos = document.querySelectorAll('.temporizador .digito')

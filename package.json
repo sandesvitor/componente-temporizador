@@ -2,7 +2,7 @@
   "name": "temporizador",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "./js/temporizador.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -19,5 +19,8 @@
     "gulp-typescript": "4.0.2",
     "gulp-uglify": "3.0.0",
     "gulp-uglifycss": "1.0.9"
+  },
+  "dependencies": {
+    "jquery": "^3.5.1"
   }
 }
