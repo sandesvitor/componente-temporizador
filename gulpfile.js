@@ -5,14 +5,14 @@ const uglify = require('gulp-uglify')
 const uglifycss = require('gulp-uglifycss')
 const babel = require('gulp-babel')
 
-function depsCSS(){
+function appCSS(){
     return gulp.src('./css/**/*.css')
         .pipe(uglifycss({ "uglyCommens":true }))
         .pipe(concat('temporizador.min.css'))
         .pipe(gulp.dest('dist/css'))
 }
 
-function depsJS(){
+function appJS(){
     return gulp.src('./js/**/*.js')
         .pipe(babel({
             comments: false,
@@ -24,4 +24,4 @@ function depsJS(){
         .pipe(gulp.dest('dist/js'))
 }
 
-module.exports.default = series(depsCSS, depsJS)
+module.exports.default = series(appCSS, appJS)

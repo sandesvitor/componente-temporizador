@@ -34,7 +34,7 @@ function Temporizador(){
         let horaDezena = 0
         
         
-        timeCount = function(){
+        const timeCount = function(){
             if(segundosUnidade < 9){
         
                 digitos[5].innerHTML = `${++segundosUnidade}`
@@ -94,7 +94,7 @@ function Temporizador(){
         
       
         
-        interval = null
+        let interval = null
         let status = "stopped"
         const start = () => {
             if(status === "stopped"){
@@ -163,6 +163,7 @@ function Temporizador(){
         }
 
         function cssControle(component, attr, value){
+            let seletor
             switch(component){
                 case 'temporizador':
                     seletor = '.temporizadorConteiner'
