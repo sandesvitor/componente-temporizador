@@ -1,13 +1,13 @@
 function Temporizador(){
-    this.init = function(args){
-        
-        function criarElemento(elemento, classe, html = '') {
-            const e = document.createElement(elemento)
-            e.classList.add(classe)
-            e.innerHTML = html
-            return e
-        }
-        
+    
+    function criarElemento(elemento, classe, html = '') {
+        const e = document.createElement(elemento)
+        e.classList.add(classe)
+        e.innerHTML = html
+        return e
+    }
+
+    this.init = function(){        
         const tempConteiner = criarElemento('div', 'temporizadorConteiner')
         const temporizador = criarElemento('div', 'temporizador')
         
@@ -34,7 +34,7 @@ function Temporizador(){
         let horaDezena = 0
         
         
-        function timeCount(){
+        this.timeCount = function(){
             if(segundosUnidade < 9){
         
                 digitos[5].innerHTML = `${++segundosUnidade}`
@@ -92,27 +92,28 @@ function Temporizador(){
             }
         }
         
+      
+        
         let interval = null
         let status = "stopped"
-        
-        
-        function startStop(){
-            if(status == "stopped"){
-                interval = window.setInterval(timeCount, (1000 * args.seconds) )   
+        this.start = () => {
+            if(status === "stopped"){
+                interval = window.setInterval(this.timeCount, 1000)   
                 status = "started"
                 if(botaoStartStop){
                     botaoStartStop.innerHTML = "STOP"      
                 }
-            } else {
+            } else if (status === "started") {
                 window.clearInterval(interval)
                 status = "stopped" 
                 if(botaoStartStop){
                     botaoStartStop.innerHTML = "START"  
                 }
-            }
+            }           
         } 
         
-        function resetTimer(){
+        
+        this.reset = () => {
             window.clearInterval(interval)
             digitos.forEach(digito => {
                 digito.innerHTML = "0"
@@ -129,26 +130,67 @@ function Temporizador(){
             status = "stopped"
         }
 
-        if(args.buttons){
-            const botoes = criarElemento('div', 'botoes')
-            tempConteiner.appendChild(botoes)
-            botoes.appendChild(criarElemento('button', 'botao', 'PLAY'))
-            botoes.appendChild(criarElemento('button', 'botao', 'RESET'))
+        
+        const botoes = criarElemento('div', 'botoes')
+        tempConteiner.appendChild(botoes)
+        botoes.appendChild(criarElemento('button', 'botao', 'PLAY'))
+        botoes.appendChild(criarElemento('button', 'botao', 'RESET'))
 
-            const botaoStartStop = document.querySelectorAll('.botao')[0]
-            const botaoReset = document.querySelectorAll('.botao')[1]
+        const botaoStartStop = document.querySelectorAll('.botao')[0]
+        const botaoReset = document.querySelectorAll('.botao')[1]
 
-            botaoStartStop.onclick = startStop
-            botaoReset.onclick = resetTimer
-        }        
+        botaoStartStop.onclick = this.start
+        botaoReset.onclick = this.reset
+               
         
     }
 
-    this.ajusteCSS = function(color){
-        $('.temporizador').css('background-color', color)
+    this.controle = comando => {
+        if (comando == 'start'){
+            interval = window.setInterval(this.timeCount, 1000)
+        }  else if (comando == 'stop') {
+            window.clearInterval(interval)
+        } else if (comando == 'reset') {
+            this.reset()
+        }
+    }
+
+    this.config = args => {
+        if (args.botoes == false){
+            $('.temporizadorConteiner .botoes').hide()
+        } else if (args.botoes == true) {
+            $('.temporizadorConteiner .botoes').show()
+        }
+
+        function cssControle(component, attr, value){
+            switch(component){
+                case 'temporizador':
+                    seletor = '.temporizadorConteiner'
+                    break
+                case 'digitosConteiner':
+                    seletor = '.temporizadorConteiner .temporizador'
+                case 'digitos':
+                    seletor = '.temporizadorConteiner .temporizador .digito'
+                    break
+                case 'botoesConteiner':
+                    seletor = '.temporizadorConteiner .botoes'
+                case 'botoes':
+                    seletor = '.temporizadorConteiner .botoes .botao'
+                case 'separador':
+                    seletor = '.temporizadorConteiner .temporizador .separador'
+                    break
+                default:
+                    seletor = component
+            }
+            $(seletor).css(attr, value)
+        } 
+
+        args.css = cssControle(args.css.componente, args.css.atributo, args.css.valor)
+        args.posicao = cssControle('temporizador', 'position', args.posicao)
+        args.display = cssControle('temporizador', 'display', args.display)
+        args.left = cssControle('temporizador', 'left',  args.left)
+        args.top = cssControle('temporizador', 'top',   args.top)
     }
 }
 
 const Chrono = new Temporizador()
-    
-

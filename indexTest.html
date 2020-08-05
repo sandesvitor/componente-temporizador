@@ -1,19 +1,33 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>HTML Test</title>
     <!-- <link rel="stylesheet" href="./dist/css/temporizador.min.css">   -->
-    <!-- <script src="./dist/js/app.min.js"></script>   -->
-    <link rel="stylesheet" href="./css/temporizador.css">
+    <!-- <script src="./dist/js/temporizador.min.js"></script>   -->
+    <link rel="stylesheet" href="./css/temporizador.css"> -->
     <script src="./js/temporizador.js"></script>
     <script src="./js/jquery.js"></script>
 </head>
 <body>
     <script>
-        Chrono.init({ buttons: true, seconds: 1 })
-        // Chrono.ajusteCSS('red')
+
+        Chrono.init()
+
+
+        Chrono.config({
+            botoes: true,
+            css : {
+                componente: 'temporizador',
+                atributo: 'background',
+                valor: 'linear-gradient(to right, black, red)'
+            },
+            posicao: 'fixed',
+            left: '5vw',
+            top: '50vh',
+            display: 'flex'
+        })
+
+
     </script>
 </body>
 </html>
