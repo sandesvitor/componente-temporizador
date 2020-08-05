@@ -1,10 +1,6 @@
 function Temporizador(){
     this.init = function(args){
         
-        // args = {
-        //     buttons: true,
-        // }
-
         function criarElemento(elemento, classe, html = '') {
             const e = document.createElement(elemento)
             e.classList.add(classe)
@@ -14,10 +10,8 @@ function Temporizador(){
         
         const tempConteiner = criarElemento('div', 'temporizadorConteiner')
         const temporizador = criarElemento('div', 'temporizador')
-        // const botoes = criarElemento('div', 'botoes')
         
         tempConteiner.appendChild(temporizador)
-        // tempConteiner.appendChild(botoes)
         document.body.appendChild(tempConteiner)
         
         temporizador.appendChild(criarElemento('span', 'digito', '0'))
@@ -27,14 +21,8 @@ function Temporizador(){
         temporizador.appendChild(criarElemento('span', 'digito', '0'))
         temporizador.appendChild(criarElemento('span', 'separador', ':'))
         temporizador.appendChild(criarElemento('span', 'digito', '0'))
-        temporizador.appendChild(criarElemento('span', 'digito','0'))
-        
-        if(args.buttons){
-            const botoes = criarElemento('div', 'botoes')
-            tempConteiner.appendChild(botoes)
-            botoes.appendChild(criarElemento('button', 'botao', 'PLAY'))
-            botoes.appendChild(criarElemento('button', 'botao', 'RESET'))
-        }       
+        temporizador.appendChild(criarElemento('span', 'digito','0'))       
+           
         
         
         const digitos = document.querySelectorAll('.temporizador .digito')
@@ -107,18 +95,20 @@ function Temporizador(){
         let interval = null
         let status = "stopped"
         
-        const botaoStartStop = document.querySelectorAll('.botao')[0]
-        const botaoReset = document.querySelectorAll('.botao')[1]
         
         function startStop(){
             if(status == "stopped"){
-                interval = window.setInterval(timeCount, 1000)   
+                interval = window.setInterval(timeCount, (1000 * args.seconds) )   
                 status = "started"
-                botaoStartStop.innerHTML = "STOP"       
+                if(botaoStartStop){
+                    botaoStartStop.innerHTML = "STOP"      
+                }
             } else {
                 window.clearInterval(interval)
                 status = "stopped" 
-                botaoStartStop.innerHTML = "START"   
+                if(botaoStartStop){
+                    botaoStartStop.innerHTML = "START"  
+                }
             }
         } 
         
@@ -138,9 +128,21 @@ function Temporizador(){
             botaoStartStop.innerHTML = "START"
             status = "stopped"
         }
+
+        if(args.buttons){
+            const botoes = criarElemento('div', 'botoes')
+            tempConteiner.appendChild(botoes)
+            botoes.appendChild(criarElemento('button', 'botao', 'PLAY'))
+            botoes.appendChild(criarElemento('button', 'botao', 'RESET'))
+
+            const botaoStartStop = document.querySelectorAll('.botao')[0]
+            const botaoReset = document.querySelectorAll('.botao')[1]
+
+            botaoStartStop.onclick = startStop
+            botaoReset.onclick = resetTimer
+        }  
         
-        botaoStartStop.onclick = startStop
-        botaoReset.onclick = resetTimer
+       
         
     }
 
