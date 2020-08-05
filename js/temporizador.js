@@ -34,7 +34,7 @@ function Temporizador(){
         let horaDezena = 0
         
         
-        this.timeCount = function(){
+        timeCount = function(){
             if(segundosUnidade < 9){
         
                 digitos[5].innerHTML = `${++segundosUnidade}`
@@ -94,11 +94,11 @@ function Temporizador(){
         
       
         
-        let interval = null
+        interval = null
         let status = "stopped"
-        this.start = () => {
+        const start = () => {
             if(status === "stopped"){
-                interval = window.setInterval(this.timeCount, 1000)   
+                interval = window.setInterval(timeCount, 1000)   
                 status = "started"
                 if(botaoStartStop){
                     botaoStartStop.innerHTML = "STOP"      
@@ -113,7 +113,7 @@ function Temporizador(){
         } 
         
         
-        this.reset = () => {
+        const reset = () => {
             window.clearInterval(interval)
             digitos.forEach(digito => {
                 digito.innerHTML = "0"
@@ -139,19 +139,19 @@ function Temporizador(){
         const botaoStartStop = document.querySelectorAll('.botao')[0]
         const botaoReset = document.querySelectorAll('.botao')[1]
 
-        botaoStartStop.onclick = this.start
-        botaoReset.onclick = this.reset
+        botaoStartStop.onclick = start
+        botaoReset.onclick = reset
                
         
     }
 
     this.controle = comando => {
         if (comando == 'start'){
-            interval = window.setInterval(this.timeCount, 1000)
+            interval = window.setInterval(timeCount, 1000)
         }  else if (comando == 'stop') {
             window.clearInterval(interval)
         } else if (comando == 'reset') {
-            this.reset()
+            reset()
         }
     }
 

@@ -2,16 +2,28 @@
 <html>
 <head>
     <title>HTML Test</title>
-    <!-- <link rel="stylesheet" href="./dist/css/temporizador.min.css">   -->
-    <!-- <script src="./dist/js/temporizador.min.js"></script>   -->
-    <link rel="stylesheet" href="./css/temporizador.css"> -->
-    <script src="./js/temporizador.js"></script>
-    <script src="./js/jquery.js"></script>
+    <link rel="stylesheet" href="./dist/css/temporizador.min.css">  
+    <script src="./dist/js/temporizador.min.js"></script>  
+    <!-- <link rel="stylesheet" href="./css/temporizador.css"> --> -->
+    <!-- <script src="./js/temporizador.js"></script> -->
+    <!-- <script src="./js/jquery.js"></script> -->
 </head>
 <body>
+    <div>
+        <h1>Configuração do Cronômetro</h1>
+        <form action="">
+            <input type="text" placeholder="Position">
+            <input type="text" placeholder="Display">
+            <input type="radio" value="Botões">Botões
+            
+        </form>
+        
+
+    </div>
     <script>
 
         Chrono.init()
+        Chrono.controle('start')
 
 
         Chrono.config({
@@ -22,7 +34,7 @@
                 valor: 'linear-gradient(to right, black, red)'
             },
             posicao: 'fixed',
-            left: '5vw',
+            left: '50vw',
             top: '50vh',
             display: 'flex'
         })
