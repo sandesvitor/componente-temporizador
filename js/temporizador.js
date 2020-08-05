@@ -189,6 +189,7 @@ function Cronometro() {
         args.display = cssControle('temporizador', 'display', args.display)
         args.left = cssControle('temporizador', 'left',  args.left)
         args.top = cssControle('temporizador', 'top',   args.top)
+        args.scale = cssControle('temporizador', 'transform', `scale(${args.scale})`)
     }
 }
 

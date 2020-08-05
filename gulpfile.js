@@ -19,7 +19,7 @@ function appJS(){
             presets: ["env"]
         }))
         .on('error', err => console.log("erro: " + e))
-        // .pipe(uglify())
+        .pipe(uglify())
         .pipe(concat('temporizador.min.js'))
         .pipe(gulp.dest('dist/js'))
 }

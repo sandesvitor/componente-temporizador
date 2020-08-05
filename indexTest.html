@@ -2,11 +2,12 @@
 <html>
 <head>
     <title>HTML Test</title>
-    <link rel="stylesheet" href="./dist/css/temporizador.min.css">  
-    <!-- <script src="./js/temporizador.js"></script>   -->
-    <script src="./dist/js/temporizador.min.js"></script>  
-    
-    <!-- <script src="./js/jquery.js"></script>   -->
+    <!-- <link rel="stylesheet" href="./dist/css/temporizador.min.css">   -->
+    <!-- <script src="./dist/js/temporizador.min.js"></script>   -->
+    <script src="./js/temporizador.js"></script>  
+    <link rel="stylesheet" href="./css/temporizador.css">    
+    <script src="./js/jquery.js"></script>  
+
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap');
         
@@ -56,14 +57,16 @@
 
         Chrono.init()
         Chrono.config({
-            botoes: true,
+            botoes: false,
             css: {
                 componente: 'temporizador',
                 atributo: 'background',
                 valor: 'linear-gradient(to right, red, black)'
-            }
+            },
+            scale: 0.7
         })
-
+        Chrono.controle('start')
+        setTimeout(Chrono.reset, 3000)
     
         
     </script>
