@@ -192,4 +192,4 @@ function Cronometro() {
     }
 }
 
-Chrono = new Cronometro()
+const Chrono = new Cronometro()
