@@ -11,8 +11,6 @@ function Cronometro() {
     this.segundosDezena = 0
     this.minutosUnidade = 0
     this.minutosDezena = 0
-    this.horaUnidade = 0
-    this.horaDezena = 0
     this.interval = null
     this.status = "stopped"
      
@@ -21,57 +19,31 @@ function Cronometro() {
         const digitos = document.querySelectorAll('.temporizadorConteiner .temporizador .digito')
         if(this.segundosUnidade < 9){
         
-            digitos[5].innerHTML = `${++this.segundosUnidade}`
+            digitos[3].innerHTML = `${++this.segundosUnidade}`
     
         } else if (this.segundosDezena < 5){
         
             this.segundosUnidade = 0
-            digitos[4].innerHTML = `${++this.segundosDezena}`
-            digitos[5].innerHTML = `${this.segundosUnidade}`
+            digitos[2].innerHTML = `${++this.segundosDezena}`
+            digitos[3].innerHTML = `${this.segundosUnidade}`
     
         } else if (this.minutosUnidade < 9) {
     
             this.segundosUnidade = 0
             this.segundosDezena = 0
-            digitos[3].innerHTML = `${++this.minutosUnidade}`
-            digitos[4].innerHTML = `${this.segundosDezena}`
-            digitos[5].innerHTML = `${this.segundosUnidade}`
+            digitos[1].innerHTML = `${++this.minutosUnidade}`
+            digitos[2].innerHTML = `${this.segundosDezena}`
+            digitos[3].innerHTML = `${this.segundosUnidade}`
     
         } else if (this.minutosDezena < 5){
     
             this.segundosUnidade = 0
             this.segundosDezena = 0
             this.minutosUnidade = 0
-            digitos[2].innerHTML = `${++this.minutosDezena}`
-            digitos[3].innerHTML = `${this.minutosUnidade}`
-            digitos[4].innerHTML = `${this.segundosDezena}`
-            digitos[5].innerHTML = `${this.segundosUnidade}`
-    
-        } else if (this.horaUnidade < 9){
-    
-            this.segundosUnidade = 0
-            this.segundosDezena = 0
-            this.minutosUnidade = 0
-            this.minutosDezena = 0
-            digitos[1].innerHTML = `${++this.horaUnidade}`
-            digitos[2].innerHTML = `${this.minutosDezena}`
-            digitos[3].innerHTML = `${this.minutosUnidade}`
-            digitos[4].innerHTML = `${this.segundosDezena}`
-            digitos[5].innerHTML = `${this.segundosUnidade}`
-    
-        } else if (this.horaDezena < 9){
-    
-            this.segundosUnidade = 0
-            this.segundosDezena = 0
-            this.minutosUnidade = 0
-            this.minutosDezena = 0
-            this.horaUnidade = 0
-            digitos[0].innerHTML = `${++this.horaDezena}`
-            digitos[1].innerHTML = `${this.horaUnidade}`
-            digitos[2].innerHTML = `${this.minutosDezena}`
-            digitos[3].innerHTML = `${this.minutosUnidade}`
-            digitos[4].innerHTML = `${this.segundosDezena}`
-            digitos[5].innerHTML = `${this.segundosUnidade}`
+            digitos[0].innerHTML = `${++this.minutosDezena}`
+            digitos[1].innerHTML = `${this.minutosUnidade}`
+            digitos[2].innerHTML = `${this.segundosDezena}`
+            digitos[3].innerHTML = `${this.segundosUnidade}`
     
         }
     }
@@ -89,9 +61,7 @@ function Cronometro() {
         temporizador.appendChild(criarElemento('span', 'separador', ':'))
         temporizador.appendChild(criarElemento('span', 'digito', '0'))
         temporizador.appendChild(criarElemento('span', 'digito', '0'))
-        temporizador.appendChild(criarElemento('span', 'separador', ':'))
-        temporizador.appendChild(criarElemento('span', 'digito', '0'))
-        temporizador.appendChild(criarElemento('span', 'digito','0')) 
+        
         
         let botoes = criarElemento('div', 'botoes', "")
         tempConteiner.appendChild(botoes)
@@ -143,14 +113,9 @@ function Cronometro() {
         this.status = "stopped"
     }
     
-    this.controle = comando => {
-        if (comando == 'start'){
-            this.interval = window.setInterval(this.timeCount, 1000)
-        }  else if (comando == 'stop') {
-            window.clearInterval(this.interval)
-        } else if (comando == 'reset') {
-            this.reset()
-        }
+
+    this.stop = () => {
+        window.clearInterval(this.interval)
     }
 
     this.config = args => {
@@ -179,7 +144,7 @@ function Cronometro() {
                     seletor = '.temporizadorConteiner .temporizador .separador'
                     break
                 default:
-                    seletor = component
+                    console.log("Componente Incorreto.")
             }
             $(seletor).css(attr, value)
         } 

@@ -6,7 +6,7 @@
     top: 10%;
     left: calc(50% - 325px);
     height: auto;
-    width: 650px;
+    width: auto;
     display: flex;
     flex-direction: column;
     justify-content: center;
